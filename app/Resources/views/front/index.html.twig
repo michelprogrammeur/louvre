@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="jumbotron" style="margin: 0;">
+                <div class="container">
+                    <h1>Bienvenue !</h1>
+                    <p>Réserver votre billet en un instant, et découvrer les plus belles oeuvres du Louvre.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container-form">
+                <div class="container">
+                    <div id="result" class=""></div>
+                    {{ form_start(form, {"attr": { 'class': "form-horizontal"} }) }}
+                    <div class="errors">
+                        {{ form_errors(form) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.visit_date, null, {"label_attr": {'class': 'col-lg-2 control-label'} }) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.visit_date, {"attr": {'class': "form-control"} }) }}
+                        </div>
+                        <input type="hidden" id="alternate">
+                    </div>
+                    <div id="select-ticket-type" class="form-group">
+                        {{ form_label(form.ticket_type, null, {"label_attr": {'class': 'col-lg-2 control-label'} }) }}
+                        <div class="col-lg-10">
+                            {{ form_widget(form.ticket_type, {"attr": {'class': "form-control"} }) }}
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        {{ form_widget(form.submit, {"attr": {'class': 'btn btn-primary btn-lg reserver'} }) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Informations Pratiques</h2>
+            <table class="table table-striped table-hover ">
+                <tbody>
+                <tr>
+                    <td>Horaires</td>
+                    <td>De 8H00 à 20h30</td>
+                </tr>
+                <tr>
+                    <td>Jours ouverts</td>
+                    <td>Lundi, Mercredi, Jeudi, Vendredi, Samedi</td>
+                </tr>
+                <tr>
+                    <td>Jours fermés</td>
+                    <td>Mardi, Dimanche, Jours fériés</td>
+                </tr>
+                <tr>
+                    <td>Justificatif pour les différents tarif</td>
+                    <td>Un justificatif vous sera demandé à l'entrée du musée pour l'achat de tout billet possédant un tarif autre que adult (enfant, sénior, réduit)</td>
+                </tr>
+                <tr>
+                    <td>Restauration</td>
+                    <td>Le musée ne possède pas de moyen pour se nourrir, merci de prévoir un repas pour les heures de déjeunés</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/i18n/jquery.ui.datepicker-fr.min.js"></script>
+     <script src="{{ asset('js/app.js') }}" ></script>
+ {% endblock %}

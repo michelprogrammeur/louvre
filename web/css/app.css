@@ -1,0 +1,191 @@
+body {
+    background-color: #FCFCFC;
+    font-family: Helvetica, Arial, sans-serif;
+}
+ul li {
+    list-style-type: none;
+}
+.table>thead>tr>th, .table>tbody>tr>th,
+.table>tfoot>tr>th, .table>thead>tr>td,
+.table>tbody>tr>td, .table>tfoot>tr>td {
+    vertical-align: middle;
+    padding: 12px 0px 12px 20px ;
+}
+.errors ul{
+    padding: 0;
+ }
+.errors ul li{
+    color: #ffffff;
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 6px;
+    background-color: #d9534f;
+    border-radius: 4px;
+}
+
+.container-form {
+    background-color: #386ecc;
+    border-radius: 0;
+    padding: 40px 20px;
+}
+
+.container form label {
+    color: #ffffff;
+}
+
+.form_full_day, .form_half_day {
+    font-size: 20px;
+}
+
+#ui-datepicker-div {
+    width: 550px;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+}
+.ui-datepicker-header .ui-widget-header .ui-helper-clearfix .ui-corner-all a span {
+    color: #ffffff;
+}
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+    top: 18px !important;
+}
+.ui-datepicker .ui-datepicker-next {
+    right: 18px !important;
+}
+.ui-datepicker .ui-datepicker-prev {
+    left: 18px !important;
+}
+#ui-datepicker-div > div {
+    background-color: #245cbf;
+    border: none;
+    border-radius: 0;
+    padding: 20px;
+    color: #ffffff;
+}
+#ui-datepicker-div table tr td {
+    padding: 0;
+    border: 1px solid #ececec;
+}
+#ui-datepicker-div table tr td span,
+#ui-datepicker-div table tr td a
+{
+    border: none;
+    padding: 10px 0 0 0;
+    height: 40px;
+    text-align: center;
+
+}
+.relative {
+    position: absolute;
+    width: 100%;
+    top: 20px;
+    padding: 0 20px;
+}
+#payment-form .form-row > label {
+    display: block !important;
+}
+.title {
+    padding: 100px 20px 20px 20px;
+    margin: 0 0 40px 0;
+    background-color: #F2F2F2;
+}
+
+.visit-date-container, .quantity-container, .total-container {
+    padding: 20px 20px 12px 20px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 12px #ECECEC;
+}
+.total-container {
+    background-color: #386ecc;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+.total-container span, .quantity-container span{
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 23px;
+}
+.total-container span {
+    color: #ffffff;
+}
+.quantity-container span {
+    color: #386ecc;
+}
+.visit-date-container span {
+    font-size: 20px;
+    color: #386ecc;
+    font-weight: 900;
+}
+.form-container, .list-tickets-container {
+    background-color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0px 0px 12px #ECECEC;
+}
+.form-container form {
+    padding: 20px;
+}
+.form-container form label {
+    color: #333333;
+}
+.form-container h4 {
+    color: #FAFAFA;
+    margin: 0;
+    padding: 20px;
+    background-color: #386ecc;
+}
+.list-tickets-container {
+    padding: 20px;
+    margin: 20px 0;
+}
+#form_ticket_submit_add i{
+    display: inline-block;
+    padding-right: 12px;
+}
+#btn-remove-list {
+    margin-top: 40px;
+}
+#btn-validate {
+    margin-bottom: 20px;
+}
+
+/* PAGE PAYEMENT ------ */
+.container-form-payment {
+    margin-top: 30px;
+    background-color: #eaeaea;
+    border-radius: 0;
+    padding: 0 20px;
+}
+.form-payment {
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: #ffffff;
+    padding: 0;
+    box-shadow: 0px 0px 12px #ECECEC;
+    margin-bottom: 40px;
+}
+.form-payment h4{
+    margin-top: 0;
+    color: #ffffff;
+    background-color: #386ecc;
+    padding: 20px;
+}
+.form-payment form{
+    padding: 20px;
+}
+.form-payment form label{
+    color: #333333;
+}
+#card-element {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+.information {
+    padding: 40px 20px 20px 20px;
+}

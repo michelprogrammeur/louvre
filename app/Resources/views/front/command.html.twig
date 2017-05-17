@@ -1,0 +1,113 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+
+        <h1 class="title">Page Commande</h1>
+        <div class="container">
+            <div class="row">
+                <a class="btn btn-link" href="{{ path('visit') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i>    Retour</a>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="visit-date-container">
+                        {% if command is not empty %}
+                            <p>Date de visite <span>{{ command.visitDate | date('d/m/y') }}</span></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-container bs-component">
+                        <h4>Ajout un billet</h4>
+                        {{ form_start(form, {"attr": { 'class': "form-horizontal"} }) }}
+                        <div class="form-group">
+                            {{ form_label(form.firstname, null, {"label_attr": {'class': 'col-lg-3 control-label'} }) }}
+                            <div class="col-lg-9">
+                                <div class="errors">{{ form_errors(form.firstname) }}</div>
+                                {{ form_widget(form.firstname, {"attr": {'class': "form-control"} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.lastname, null, {"label_attr": {'class': 'col-lg-3 control-label'} }) }}
+                            <div class="col-lg-9">
+                                <div class="errors">{{ form_errors(form.lastname) }}</div>
+                                {{ form_widget(form.lastname, {"attr": {'class': "form-control"} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.country, null, {"label_attr": {'class': 'col-lg-3 control-label'} }) }}
+                            <div class="col-lg-9">
+                                <div class="errors">{{ form_errors(form.country) }}</div>
+                                {{ form_widget(form.country, {"attr": {'class': "form-control"} }) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.birthdate, null, {"label_attr": {'class': 'col-lg-3 control-label'} }) }}
+                            <div class="col-lg-9">
+                                <div class="errors">{{ form_errors(form.birthdate) }}</div>
+                                <div class="form-group">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        {{ form_widget(form.birthdate.day, {"attr": {'class': "form-control"} }) }}
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        {{ form_widget(form.birthdate.month, {"attr": {'class': "form-control"} }) }}
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        {{ form_widget(form.birthdate.year, {"attr": {'class': "form-control"} }) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.reduce, null, {"label_attr": {'class': 'col-lg-3 control-label'} }) }}
+                            <div class="col-lg-2 col-md-1 col-sm-1 col-xs-2">
+                                <div class="errors">{{ form_errors(form.reduce) }}</div>
+                                {{ form_widget(form.reduce, {"attr": {'class': "form-control"} }) }}
+                            </div>
+                        </div>
+
+                        <div class="text-right">
+                            {{ form_widget(form.submit_add, {'attr': {'class': 'btn btn-primary btn-block'} }) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-lg-offset-1">
+                    {% if tickets is empty %}
+                        <p>Aucun billet n'a été ajoutés</p>
+                    {% else %}
+                        <div class="text-right">
+                            <a id="btn-remove-list" class="btn btn-danger" href="{{ path('remove_tickets_session') }}">Vider la liste</a>
+                        </div>
+                        <div class="list-tickets-container">
+                            <h4>Liste de vos billets</h4>
+                            <table class="table table-striped" >
+                                {% for key, ticket in tickets %}
+                                    <tr>
+                                        <td><i class="fa fa-ticket" aria-hidden="true"></i></td>
+                                        <td>{{ ticket.firstname }} </td>
+                                        <td>{{ ticket.lastname }}</td>
+                                        <td>{{ ticket.birthdate | date('d/m/y') }}</td>
+                                        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><a class="btn btn-danger" href="{{ path('delete_ticket_session', {'id': (key) }) }}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        <a id="btn-validate" class="btn btn-success btn-block" href="{{ path('payment') }}">Valider</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    {{ dump(app.session.get('command')) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

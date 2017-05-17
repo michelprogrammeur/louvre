@@ -1,0 +1,29 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    app.manage_session:
+              class:     AppBundle\Services\ManageSession
+              arguments: ["@session"]
+
+    app.assign_price:
+              class:     AppBundle\Services\AssignPrice
+              arguments: ["@session"]
+
+    app.manage_sending_mail:
+              class:     AppBundle\Services\ManageSendingMail
+              arguments: ["@templating", "@mailer", "@session"]
+
+    app.payment_stripe:
+              class:     AppBundle\Services\PaymentStripe
+              arguments: ["@session", "@service_container", "@request_stack"]
+
+    app.push_database:
+              class:     AppBundle\Services\PushDatabase
+              arguments: ["@session", "@doctrine.orm.entity_manager", "@request_stack"]
+
+    #service_name:
+    #    class: AppBundle\Directory\ClassName
+    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
