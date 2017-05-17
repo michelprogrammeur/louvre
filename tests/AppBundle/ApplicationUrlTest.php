@@ -48,5 +48,5 @@ class ApplicationUrlTest extends WebTestCase
         $client->request('GET', '/api/ticket/count/2017-05-30');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
-    
+
 }

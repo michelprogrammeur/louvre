@@ -15,12 +15,12 @@ class ManageSession
     }
 
 
-    public function addTicketInSession(Ticket $ticket, $session) {
+    public function addTicketInSession(Ticket $ticket, Object $session) {
         $session->addTicket($ticket);
     }
 
 
-    public function removeTicketFromSession(int $id = null, $session) {
+    public function removeTicketFromSession(int $id = null, Object $session) {
         $tickets = $session->getTickets();
         foreach($tickets as $key => $ticket) {
             if ($key == $id) {

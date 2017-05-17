@@ -55,12 +55,11 @@ class FrontController extends Controller
             $ticket = new Ticket();
             $form = $this->createForm('AppBundle\Form\TicketType', $ticket);
             $form->handleRequest($request);
-
             if ($form->isSubmitted() && $form->isValid()) {
                 $block_billet = $this->blockCommandTicket($request, $session_command->getVisitDate()->date);
                 if (!$block_billet) {
-
                     $session->getFlashBag()->add('warning', "Désolé, plus de billets disponibles");
+
                     return $this->redirectToRoute('command');
                 }else {
                     $manage_session->addTicketInSession($ticket, $session_command);
@@ -97,22 +96,18 @@ class FrontController extends Controller
             $manage_session = $this->get("app.manage_session");
             $payment_stripe = $this->get('app.payment_stripe');
             $em = $this->getDoctrine()->getManager();
-
             $assign_price->manageTicket($session_command);
-
             $form = $this->createForm('AppBundle\Form\PaymentType', $session_command);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid() && $payment_stripe->stripe()) {
                 $manage_sending_mail = $this->get("app.manage_sending_mail");
                 $manage_sending_mail->sendCommandMail($session_command->getCommandNumber(), $session_command);
-
                 $em->persist($session_command);
                 $em->flush();
-
                 $manage_session->clearSession('command');
-
                 $session->getFlashBag()->add('success', "Votre commande à bien été effectuée. Vous allez recevoir un mail de confirmation, contenants vos billets");
+
                 return $this->redirectToRoute('visit');
             }
 

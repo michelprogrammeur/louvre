@@ -14,7 +14,7 @@ class AssignPrice
         $this->session = $session;
     }
 
-    public function manageTicket($session) {
+    public function manageTicket(Object $session) {
         $tickets = $session->getTickets();
 
         foreach ($tickets as $key => $ticket) {
@@ -30,7 +30,7 @@ class AssignPrice
         $session->setQuantity($quantity);
     }
 
-    public function isReduce($ticket, $price_type) {
+    public function isReduce(Ticket $ticket, String $price_type) {
         if($ticket->getReduce() && $price_type === 'free') {
             $price_type = 'free';
         }elseif($ticket->getReduce() && $price_type === 'enfant') {
@@ -67,8 +67,6 @@ class AssignPrice
 
                 return "free";
         }
-
-
     }
 
 
@@ -96,7 +94,7 @@ class AssignPrice
     }
 
 
-    public function calculTotal($session) {
+    public function calculTotal(Object $session) {
         $tickets = $session->getTickets();
 
         $sum = 0;
@@ -108,7 +106,7 @@ class AssignPrice
     }
 
 
-    public function calculQuantity($session) {
+    public function calculQuantity(Object $session) {
         $tickets = $session->getTickets();
         $quantity = count($tickets);
 
