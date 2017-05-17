@@ -56,6 +56,4 @@ class VisitType extends AbstractType
     {
         return 'appbundle_command';
     }
-
-
 }

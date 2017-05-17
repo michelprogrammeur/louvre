@@ -62,6 +62,4 @@ class PaymentType extends AbstractType
     {
         return 'form_payment';
     }
-
-
 }

@@ -14,7 +14,7 @@ class AssignPrice
         $this->session = $session;
     }
 
-    public function manageTicket(Object $session) {
+    public function manageTicket($session) {
         $tickets = $session->getTickets();
 
         foreach ($tickets as $key => $ticket) {
@@ -94,7 +94,7 @@ class AssignPrice
     }
 
 
-    public function calculTotal(Object $session) {
+    public function calculTotal($session) {
         $tickets = $session->getTickets();
 
         $sum = 0;
@@ -106,7 +106,7 @@ class AssignPrice
     }
 
 
-    public function calculQuantity(Object $session) {
+    public function calculQuantity($session) {
         $tickets = $session->getTickets();
         $quantity = count($tickets);
 

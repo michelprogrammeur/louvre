@@ -12,7 +12,7 @@ use Doctrine\ORM\Query;
  */
 class CommandRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function CountAllTicketsByDay($visit_date)
+    public function countAllTicketsByDay($visit_date)
     {
         return $this->getEntityManager()
             ->createQuery('

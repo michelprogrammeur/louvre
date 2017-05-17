@@ -59,6 +59,4 @@ class TicketType extends AbstractType
     {
         return 'form_ticket';
     }
-
-
 }

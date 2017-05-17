@@ -21,7 +21,7 @@ class PaymentStripe
         $this->request = $request;
     }
 
-    public function Stripe() {
+    public function stripe() {
         $request = $this->request->getCurrentRequest();
         $session_command = $this->session->get('command');
         $secret_key = $this->container->getParameter('stripe_secret');

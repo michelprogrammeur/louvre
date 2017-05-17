@@ -161,7 +161,7 @@ class FrontController extends Controller
     public function countAllTicketsByDayAction(string $date) {
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:Command');
-        $req = $repository->CountAllTicketsByDay($date);
+        $req = $repository->countAllTicketsByDay($date);
 
         $number_ticket = array_sum(array_column($req, 'quantity'));
 

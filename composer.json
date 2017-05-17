@@ -1,5 +1,6 @@
 {
-    "name": "antoine/symfony_test",
+    "name": "antoine/symfony_louvre",
+    "description": "This website allows the sale of tickets to visit the Louvre Museum",
     "license": "proprietary",
     "type": "project",
     "autoload": {
