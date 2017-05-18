@@ -33,6 +33,10 @@ ul li {
     color: #ffffff;
 }
 
+.bkg-header {
+    border-bottom: 1px solid #acacac;
+}
+
 .form_full_day, .form_half_day {
     font-size: 20px;
 }
@@ -79,6 +83,7 @@ ul li {
     position: absolute;
     width: 100%;
     top: 20px;
+    margin-top: 70px;
     padding: 0 20px;
 }
 #payment-form .form-row > label {

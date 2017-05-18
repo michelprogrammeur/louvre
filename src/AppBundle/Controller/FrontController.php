@@ -88,7 +88,7 @@ class FrontController extends Controller
         $session = $request->getSession();
         $session_command = $session->get('command');
 
-        if (empty($session_command) || empty($session_command->getTickets()->elements)) {
+        if (empty($session_command) || count($session_command->getTickets()) <= 0) {
 
             return $this->redirectToRoute('visit');
         }else {
@@ -127,12 +127,7 @@ class FrontController extends Controller
         $session = $request->getSession();
         $session_command = $session->get('command');
         $manage_session = $this->get("app.manage_session");
-        $m = $manage_session->removeTicketFromSession($id, $session_command);
-        if (!$m) {
-            $session->getFlashBag()->add('warning', "Le ticket à supprmer n'existe pas !.");
-
-            return $this->redirectToRoute('command');
-        }
+        $manage_session->removeTicketFromSession($id, $session_command);
         $session->getFlashBag()->add('success', "Le ticket sélectionné à bien été supprimé.");
 
         return $this->redirectToRoute('command');

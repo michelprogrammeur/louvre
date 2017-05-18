@@ -13,6 +13,16 @@
 
     </head>
     <body>
+        <header>
+            <div class="bkg-header container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <a href="{{ path('visit') }}"><img src="{{ asset('assets/logo.png') }}" height="70"></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
         {% block body %}
             <div class="relative">
                 {% if app.session.flashBag.has('success') %}

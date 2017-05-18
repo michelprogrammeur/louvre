@@ -8,20 +8,23 @@
             <div class="row">
                 <a class="btn btn-link" href="{{ path('visit') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i>    Retour</a>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="visit-date-container">
-                        {% if command is not empty %}
-                            <p>Date de visite <span>{{ command.visitDate | date('d/m/y') }}</span></p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
+                    <div class="visit-date-container">
+                        {% if command is not empty %}
+                            <p>Type de billet: <span>Billet {{ command.ticketType }}</span></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="visit-date-container">
+                        {% if command is not empty %}
+                            <p>Date de visite <span>{{ command.visitDate | date('d/m/y') }}</span></p>
+                        {% endif %}
+                    </div>
+
                     <div class="form-container bs-component">
                         <h4>Ajout un billet</h4>
                         {{ form_start(form, {"attr": { 'class': "form-horizontal"} }) }}
