@@ -2,16 +2,26 @@
 
 namespace AppBundle\Services;
 
+use AppBundle\Entity\Command;
 use AppBundle\Entity\Ticket;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ManageSession
 {
+    private $limit_ticket_by_day = 1000;
     protected $session;
+    protected $request;
+    protected $em;
 
-    public function __construct(Session $session)
+    public function __construct(Session $session, RequestStack $request, EntityManager $em)
     {
         $this->session = $session;
+        $this->request = $request;
+        $this->em = $em;
     }
 
 
@@ -27,6 +37,20 @@ class ManageSession
                 $session->removeTicket($ticket);
             }
         }
+    }
+
+    public function blockCommandTicket($session, string $date, $entity) {
+        $repository = $this->em->getRepository($entity);
+        $number_ticket = $repository->CountAllTicketsByDay($date);
+        if ($number_ticket === null) {
+            $number_ticket = 0;
+        }
+        $session_number_tickets = count($session->getTickets());
+
+        if ($session_number_tickets >= $this->limit_ticket_by_day - $number_ticket ) {
+            return false;
+        }
+        return true;
     }
 
 

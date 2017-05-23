@@ -86,7 +86,7 @@
                         <p>Aucun billet n'a été ajoutés</p>
                     {% else %}
                         <div class="text-right">
-                            <a id="btn-remove-list" class="btn btn-danger" href="{{ path('remove_tickets_session') }}">Vider la liste</a>
+                            <a id="btn-remove-list" class="btn btn-danger" href="{{ path('remove_tickets_session') }}" onclick="return confirm('Si vous supprimez la liste vous serez redirigé vers la page d\'accueil. Vous devrez alors choisir à nouveau une date de visite.')">Vider la liste</a>
                         </div>
                         <div class="list-tickets-container">
                             <h4>Liste de vos billets</h4>

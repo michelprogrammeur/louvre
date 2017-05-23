@@ -1,6 +1,5 @@
-
+<img src="https://www.grapheine.com/wp-content/uploads/2016/04/louvre-1eravril-800x238.jpg" alt="logo louvre">
 <h1>Confirmation de votre commande sur le site du Louvre</h1>
-
 Merci {{ command.firstname }}, d'avoir acheté vos billet sur le site du Louvre.
 
 <h2>Récapitulatif de votre commande</h2>
@@ -11,7 +10,7 @@ Merci {{ command.firstname }}, d'avoir acheté vos billet sur le site du Louvre.
     <p>Montant total de votre commande: {{ command.total }} €</p>
 </div>
 
-<h3>Liste des billets (nominatif)</h3>
+<h3>Liste des billets (nominatifs)</h3>
 <ul>
     {% for key, ticket in command.tickets %}
         <li>

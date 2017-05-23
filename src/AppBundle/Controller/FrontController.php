@@ -56,7 +56,7 @@ class FrontController extends Controller
             $form = $this->createForm('AppBundle\Form\TicketType', $ticket);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $block_billet = $this->blockCommandTicket($request, $session_command->getVisitDate()->date);
+                $block_billet = $manage_session->blockCommandTicket($session_command, $session_command->getVisitDate()->date, 'AppBundle:Command');
                 if (!$block_billet) {
                     $session->getFlashBag()->add('warning', "Désolé, plus de billets disponibles");
 
@@ -85,8 +85,7 @@ class FrontController extends Controller
      */
     public function paymentAction(Request $request)
     {
-        $session = $request->getSession();
-        $session_command = $session->get('command');
+        $session_command = $request->getSession()->get('command');
 
         if (empty($session_command) || count($session_command->getTickets()) <= 0) {
 
@@ -102,14 +101,19 @@ class FrontController extends Controller
 
             if ($form->isSubmitted() && $form->isValid() && $payment_stripe->stripe()) {
                 $manage_sending_mail = $this->get("app.manage_sending_mail");
-                $manage_sending_mail->sendCommandMail($session_command->getCommandNumber(), $session_command);
+                $number_command = $session_command->getCommandNumber();
+                $manage_sending_mail->sendCommandMail($number_command, $session_command);
                 $em->persist($session_command);
                 $em->flush();
                 $manage_session->clearSession('command');
-                $session->getFlashBag()->add('success', "Votre commande à bien été effectuée. Vous allez recevoir un mail de confirmation, contenants vos billets");
+                $request->getSession()->getFlashBag()->add('success', "Votre commande à bien été effectuée. Vous allez recevoir un mail de confirmation, contenants vos billets.");
+                $request->getSession()->getFlashBag()->add('info', "Numéro de commande:  $number_command");
 
                 return $this->redirectToRoute('visit');
+            }elseif ($form->isSubmitted() && $form->isValid() && !$payment_stripe->stripe()) {
+                $request->getSession()->getFlashBag()->add('warning', "La commande à echouée :(. Veuillez réessayer. ");
             }
+
 
             return $this->render('front/payment.html.twig', array(
                 'form' => $form->createView(),
@@ -156,9 +160,7 @@ class FrontController extends Controller
     public function countAllTicketsByDayAction(string $date) {
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:Command');
-        $req = $repository->countAllTicketsByDay($date);
-
-        $number_ticket = array_sum(array_column($req, 'quantity'));
+        $number_ticket = $repository->countAllTicketsByDay($date);
 
         $response = new Response(json_encode($number_ticket));
         $response->headers->set('Content-Type', 'application/json');
@@ -166,20 +168,4 @@ class FrontController extends Controller
         return $response;
     }
 
-
-
-    private function blockCommandTicket(Request $request, string $date) {
-        $session = $request->getSession();
-        $session_command = $session->get('command');
-
-        $repository = $this->getDoctrine()->getRepository('AppBundle:Command');
-        $req = $repository->CountAllTicketsByDay($date);
-        $number_ticket = array_sum(array_column($req, 'quantity'));
-        $session_number_tickets = count($session_command->getTickets());
-
-        if ($session_number_tickets >= 4 - $number_ticket ) {
-            return false;
-        }
-        return true;
-    }
 }

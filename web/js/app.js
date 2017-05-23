@@ -70,14 +70,12 @@ let disabledDays = function (date) {
 
 // affiche le nombre de billets restants chaque jours
 let ajaxNumberTickets = function(val) {
-    let maxTicketsByDay = 4,
+    let maxTicketsByDay = 1000,
         date = new Date(val),
         day = date.getDate(),
         month = date.getMonth() + 1,
         year = date.getFullYear(),
         format_date = [day, month, year].join('/')
-
-    console.log(val)
 
     $.ajax({
         type: "GET",

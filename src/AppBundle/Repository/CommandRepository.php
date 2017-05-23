@@ -14,11 +14,12 @@ class CommandRepository extends \Doctrine\ORM\EntityRepository
 {
     public function countAllTicketsByDay($visit_date)
     {
-        return $this->getEntityManager()
-            ->createQuery('
-                SELECT c FROM AppBundle:Command c WHERE c.visitDate = :visit_date
-            ')
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("sum(c.quantity)")
+            ->from("AppBundle:Command", "c")
+            ->where("c.visitDate = :visit_date")
             ->setParameter('visit_date', $visit_date)
-            ->getResult(Query::HYDRATE_ARRAY);
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

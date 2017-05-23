@@ -6,7 +6,7 @@ parameters:
 services:
     app.manage_session:
               class:     AppBundle\Services\ManageSession
-              arguments: ["@session"]
+              arguments: ["@session", "@request_stack", "@doctrine.orm.entity_manager"]
 
     app.assign_price:
               class:     AppBundle\Services\AssignPrice
