@@ -3,22 +3,18 @@
 namespace AppBundle\Services;
 
 use Swift_Message;
-use Swift_Image;
 use Symfony\Bundle\TwigBundle\TwigEngine;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class ManageSendingMail
 {
     protected $templating;
     protected $mailer;
-    protected $session;
 
-    public function __construct(TwigEngine $templating, \Swift_Mailer $mailer, Session $session)
+    public function __construct(TwigEngine $templating, \Swift_Mailer $mailer)
     {
         $this->mailer = $mailer;
         $this->templating = $templating;
-        $this->session = $session;
     }
 
 

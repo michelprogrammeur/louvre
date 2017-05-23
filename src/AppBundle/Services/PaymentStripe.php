@@ -3,7 +3,6 @@ namespace AppBundle\Services;
 
 use Stripe\Charge;
 use Stripe\Stripe;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -40,9 +39,11 @@ class PaymentStripe
             ));
             $session_command->setCommandedAt(new \DateTime());
             $session_command->setCommandNumber();
-        }catch (Exception $e) {
+
+            return true;
+        }catch (\Exception $e) {
             return false;
         }
-        return true;
+
     }
 }

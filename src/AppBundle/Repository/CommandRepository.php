@@ -2,7 +2,6 @@
 
 namespace AppBundle\Repository;
 
-use Doctrine\ORM\Query;
 
 /**
  * CommandRepository
@@ -12,7 +11,7 @@ use Doctrine\ORM\Query;
  */
 class CommandRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function countAllTicketsByDay($visit_date)
+    public function countAllTicketsByDay(String $visit_date)
     {
         return $this->getEntityManager()->createQueryBuilder()
             ->select("sum(c.quantity)")

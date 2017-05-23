@@ -111,7 +111,9 @@ class FrontController extends Controller
 
                 return $this->redirectToRoute('visit');
             }elseif ($form->isSubmitted() && $form->isValid() && !$payment_stripe->stripe()) {
-                $request->getSession()->getFlashBag()->add('warning', "La commande à echouée :(. Veuillez réessayer. ");
+                $request->getSession()->getFlashBag()->add('warning', "La commande à echouée. Veuillez réessayer. ");
+
+                return $this->redirectToRoute('payment');
             }
 
 

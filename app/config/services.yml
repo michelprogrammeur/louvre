@@ -14,7 +14,7 @@ services:
 
     app.manage_sending_mail:
               class:     AppBundle\Services\ManageSendingMail
-              arguments: ["@templating", "@mailer", "@session"]
+              arguments: ["@templating", "@mailer"]
 
     app.payment_stripe:
               class:     AppBundle\Services\PaymentStripe

@@ -2,10 +2,8 @@
 
 namespace AppBundle\Services;
 
-use AppBundle\Entity\Command;
 use AppBundle\Entity\Ticket;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -25,12 +23,12 @@ class ManageSession
     }
 
 
-    public function addTicketInSession(Ticket $ticket, $session) {
+    public function addTicketInSession(Ticket $ticket, SessionInterface $session) {
         $session->addTicket($ticket);
     }
 
 
-    public function removeTicketFromSession(int $id = null, $session) {
+    public function removeTicketFromSession(int $id = null, SessionInterface $session) {
         $tickets = $session->getTickets();
         foreach($tickets as $key => $ticket) {
             if ($key == $id) {
@@ -39,7 +37,7 @@ class ManageSession
         }
     }
 
-    public function blockCommandTicket($session, string $date, $entity) {
+    public function blockCommandTicket(SessionInterface $session, String $date, String $entity) {
         $repository = $this->em->getRepository($entity);
         $number_ticket = $repository->CountAllTicketsByDay($date);
         if ($number_ticket === null) {
