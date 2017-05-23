@@ -58,7 +58,7 @@ class Ticket
      *
      * @ORM\Column(name="birthdate", type="datetime")
      * @Assert\NotBlank(message="Cette valeur ne doit pas être vide.", groups={"ticket"})
-     * @Assert\Datetime(groups={"ticket"})
+     * @Assert\DateTime(groups={"ticket"})
      */
     private $birthdate;
 

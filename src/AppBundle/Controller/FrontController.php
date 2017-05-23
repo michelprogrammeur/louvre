@@ -23,7 +23,7 @@ class FrontController extends Controller
         $manage_session->clearSession('command');
 
         $command = new Command();
-        $form = $this->createForm('AppBundle\Form\VisitType', $command);
+        $form = $this->createForm('AppBundle\Form\Type\VisitType', $command);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ class FrontController extends Controller
             return $this->redirectToRoute('visit');
         }else {
             $ticket = new Ticket();
-            $form = $this->createForm('AppBundle\Form\TicketType', $ticket);
+            $form = $this->createForm('AppBundle\Form\Type\TicketType', $ticket);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $block_billet = $manage_session->blockCommandTicket($session_command, $session_command->getVisitDate()->date, 'AppBundle:Command');
@@ -96,7 +96,7 @@ class FrontController extends Controller
             $payment_stripe = $this->get('app.payment_stripe');
             $em = $this->getDoctrine()->getManager();
             $assign_price->manageTicket($session_command);
-            $form = $this->createForm('AppBundle\Form\PaymentType', $session_command);
+            $form = $this->createForm('AppBundle\Form\Type\PaymentType', $session_command);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid() && $payment_stripe->stripe()) {

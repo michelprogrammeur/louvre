@@ -4,7 +4,6 @@ namespace AppBundle\Services;
 
 use AppBundle\Entity\Ticket;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class AssignPrice
 {
@@ -15,7 +14,7 @@ class AssignPrice
         $this->session = $session;
     }
 
-    public function manageTicket(SessionInterface $session) {
+    public function manageTicket($session) {
         $tickets = $session->getTickets();
 
         foreach ($tickets as $key => $ticket) {
@@ -95,7 +94,7 @@ class AssignPrice
     }
 
 
-    public function calculTotal(SessionInterface $session) {
+    public function calculTotal($session) {
         $tickets = $session->getTickets();
 
         $sum = 0;
@@ -107,7 +106,7 @@ class AssignPrice
     }
 
 
-    public function calculQuantity(SessionInterface $session) {
+    public function calculQuantity($session) {
         $tickets = $session->getTickets();
         $quantity = count($tickets);
 
